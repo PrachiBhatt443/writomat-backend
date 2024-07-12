@@ -1,9 +1,9 @@
 services:
   - type: web
     name: writomat-backend
-    env: java
+    env: docker
     plan: free
-    buildCommand: "./mvnw clean package"
+    buildCommand: "mvn clean package"
     startCommand: "java -jar target/writomat-0.0.1-SNAPSHOT.jar"
     repo: https://github.com/PrachiBhatt443/writomat-backend
     branch: master
@@ -12,3 +12,4 @@ services:
     envVars:
       - key: DATABASE_URL
         value: "jdbc:h2:mem:testdb"
+    dockerfilePath: "./Dockerfile"
