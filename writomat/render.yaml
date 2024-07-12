@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: writomat-backend
+    env: java
+    plan: free
+    buildCommand: "./mvnw clean package"
+    startCommand: "java -jar target/writomat-0.0.1-SNAPSHOT.jar"
+    repo: https://github.com/PrachiBhatt443/writomat-backend
+    branch: master
+    autoDeploy: true
+    healthCheckPath: "/health"
+    envVars:
+      - key: DATABASE_URL
+        value: "jdbc:h2:mem:testdb"
