@@ -4,8 +4,14 @@ FROM maven:3.8.5-openjdk-17 AS build
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the Maven wrapper and project files to the container
-COPY . .
+# Copy the pom.xml file
+COPY writomat/pom.xml .
+
+# Copy the src directory
+COPY writomat/src /app/src
+
+# Download dependencies
+RUN mvn dependency:go-offline
 
 # Build the application with Maven
 RUN mvn clean package -DskipTests
