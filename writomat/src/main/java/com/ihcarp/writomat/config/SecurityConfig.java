@@ -30,6 +30,8 @@ public class SecurityConfig {
                 )
                 .cors(cors -> cors
                         .configurationSource(corsConfigurationSource())
+                        .and()
+                        .addFilterBefore(new CorsLoggingFilter(), BasicAuthenticationFilter.class)
                 );
 
         return http.build();
@@ -39,15 +41,18 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
-            "https://social-media-analytics-dashboard-self.vercel.app",
-            "http://localhost:3000",
-            "https://writomat-backend.onrender.com"  // Add this origin
+                "https://social-media-analytics-dashboard-self.vercel.app",
+                "http://localhost:3000",
+                "https://writomat-backend.onrender.com"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true); // Allow credentials
+        configuration.setExposedHeaders(Arrays.asList("Authorization")); // Expose specific headers
+        configuration.setMaxAge(3600L); // Cache preflight response for 1 hour
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }
+
