@@ -18,3 +18,4 @@ import java.util.List;
 public interface AnalyticsRepository extends JpaRepository<Analytics, Long> {
     List<Analytics> findByUserId(Long userId);
 }
+

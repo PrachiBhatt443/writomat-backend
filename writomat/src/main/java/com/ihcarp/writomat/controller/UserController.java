@@ -1,6 +1,7 @@
 package com.ihcarp.writomat.controller;
 
 import com.ihcarp.writomat.entity.User;
+import com.ihcarp.writomat.entity.Analytics;
 import com.ihcarp.writomat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,21 +12,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = {"http://localhost:3000", "https://social-media-analytics-dashboard-self.vercel.app"})
-
+@CrossOrigin(origins = "https://social-media-analytics-dashboard-self.vercel.app/")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    // Create a new user
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
-    // Get a user by ID
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
@@ -35,23 +33,36 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    // Get all users
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
-        if (users.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    // Delete a user by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        boolean isRemoved = userService.deleteUser(id);
-        if (!isRemoved) {
+        boolean isDeleted = userService.deleteUser(id);
+        if (isDeleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/{userId}/analytics")
+    public ResponseEntity<List<Analytics>> getUserAnalytics(@PathVariable Long userId) {
+        List<Analytics> analytics = userService.getUserAnalytics(userId);
+        if (analytics == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(analytics, HttpStatus.OK);
+    }
+
+    @PostMapping("/{userId}/analytics")
+    public ResponseEntity<Analytics> createAnalytics(@PathVariable Long userId, @RequestBody Analytics analytics) {
+        Analytics createdAnalytics = userService.createAnalytics(userId, analytics);
+        if (createdAnalytics == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(createdAnalytics, HttpStatus.CREATED);
     }
 }
