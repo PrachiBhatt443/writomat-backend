@@ -11,7 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "https://social-media-analytics-dashboard-self.vercel.app/")
+@CrossOrigin(origins = {"http://localhost:3000", "https://social-media-analytics-dashboard-self.vercel.app"})
+
 public class UserController {
 
     @Autowired

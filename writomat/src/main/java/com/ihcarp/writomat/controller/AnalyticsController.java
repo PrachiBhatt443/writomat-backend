@@ -8,7 +8,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/analytics")
-@CrossOrigin(origins = "https://social-media-analytics-dashboard-self.vercel.app/")
+@CrossOrigin(origins = {"http://localhost:3000", "https://social-media-analytics-dashboard-self.vercel.app"})
+
 public class AnalyticsController {
     @Autowired
     private AnalyticsService analyticsService;
