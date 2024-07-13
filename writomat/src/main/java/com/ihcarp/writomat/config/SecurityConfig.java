@@ -37,7 +37,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://social-media-analytics-dashboard-self.vercel.app/"));
+        configuration.setAllowedOrigins(Arrays.asList(
+            "https://social-media-analytics-dashboard-self.vercel.app",
+            "http://localhost:3000" ,
+            "https://social-media-analytics-dashboard-self.vercel.app/" // Add any other origins you need
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
