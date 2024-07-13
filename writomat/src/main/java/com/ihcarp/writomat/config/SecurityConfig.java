@@ -20,15 +20,16 @@ public class SecurityConfig {
         http
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/h2-console/**").permitAll()  // Allow access to H2 console
-                                .requestMatchers("/api/users/**").permitAll()  // Allow access to your API endpoints
-                                .anyRequest().authenticated()  // Require authentication for all other requests
+                                .requestMatchers("/h2-console/**").permitAll()
+                                .requestMatchers("/api/users/**").permitAll()
+                                .requestMatchers("/api/analytics/**").permitAll()
+                                .anyRequest().authenticated()
                 )
-                .csrf(csrf -> csrf.disable())  // Disable CSRF protection for H2 console
+                .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers
-                        .frameOptions(frameOptions -> frameOptions.sameOrigin())  // Use sameOrigin to allow H2 console in iframes
+                        .frameOptions(frameOptions -> frameOptions.sameOrigin())
                 )
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()));  // Enable CORS configuration
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         return http.build();
     }
@@ -36,9 +37,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://social-media-analytics-dashboard-315ftrnp3.vercel.app"));  // Allow this origin
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Allowed HTTP methods
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));  // Allowed headers
+        configuration.setAllowedOrigins(Arrays.asList("https://social-media-analytics-dashboard-315ftrnp3.vercel.app"));  
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
