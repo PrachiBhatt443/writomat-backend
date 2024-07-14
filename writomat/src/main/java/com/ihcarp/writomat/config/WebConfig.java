@@ -10,9 +10,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")  // List your frontend origins explicitly
+                .allowedOrigins("http://localhost:3000", "https://social-media-analytics-dashboard-self.vercel.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("Authorization", "Content-Type", "X-Requested-With")
-                .allowCredentials(true);  // Ensure credentials are allowed// Allow credentials (cookies, HTTP authentication)
+                .allowCredentials(true);
     }
 }

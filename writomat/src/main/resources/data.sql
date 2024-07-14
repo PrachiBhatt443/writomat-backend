@@ -8,7 +8,7 @@ INSERT INTO analytics (
     totalPosts, totalSaves, totalComments, totalShares, user_id
 ) VALUES (
     'Facebook', 'JohnDoeFB', 'Tech', 'Tech Enthusiast', 'john.doe@example.com',
-    'https://facebook.com/JohnDoeFB', 1200, 300, 5000, 2500, 150, 20, 5, 300,30,
+    'https://facebook.com/JohnDoeFB', 1200, 300, 5000, 2500, 150, 20, 5, 300, 30,
     100, 50, 200, 60, 1
 );
 
@@ -18,6 +18,7 @@ INSERT INTO analytics (
     totalPosts, totalSaves, totalComments, totalShares, user_id
 ) VALUES (
     'Instagram', 'JohnDoeIG', 'Lifestyle', 'Lifestyle Blogger', 'john.doe@example.com',
-    'https://instagram.com/JohnDoeIG', 1400, 500, 6000, 2800, 200, 25, 10, 400,40,
+    'https://instagram.com/JohnDoeIG', 1400, 500, 6000, 2800, 200, 25, 10, 400, 40,
     120, 55, 210, 65, 1
 );
+SELECT * FROM analytics;
