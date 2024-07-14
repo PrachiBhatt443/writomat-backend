@@ -1,5 +1,5 @@
 package com.ihcarp.writomat.entity;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,6 +33,7 @@ public class Analytics {
     private Integer totalComments;
     private Integer totalShares;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

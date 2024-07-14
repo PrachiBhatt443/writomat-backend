@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=build /app/target/writomat-0.0.1-SNAPSHOT.jar /app/writomat.jar
 
 # Expose port 8080
-EXPOSE 10000
+#EXPOSE 10000
 
 # Define the command to run the JAR file
 ENTRYPOINT ["java", "-jar", "/app/writomat.jar"]
