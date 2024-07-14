@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/analytics")
+//@CrossOrigin(origins = "*", allowedMethods = "GET, POST, PUT, DELETE, OPTIONS", allowedHeaders = "*", allowCredentials = true)
 public class AnalyticsController {
 
     @Autowired
@@ -18,7 +19,6 @@ public class AnalyticsController {
     public Analytics createAnalytics(@RequestBody Analytics analytics) {
         return analyticsService.saveAnalytics(analytics);
     }
-
     @GetMapping("/user/{userId}")
     public List<Analytics> getAnalyticsByUserId(@PathVariable Long userId) {
         return analyticsService.getAnalyticsByUserId(userId);

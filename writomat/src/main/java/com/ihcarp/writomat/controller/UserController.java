@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin(origins = "https://social-media-analytics-dashboard-self.vercel.app")
+//    @CrossOrigin(origins = "https://social-media-analytics-dashboard-self.vercel.app")
     @GetMapping("/analytics/{userId}")
     public Map<String, Object> getUserAnalytics(@PathVariable Long userId) {
         Optional<User> userOptional = userService.getUserWithAnalytics(userId);
